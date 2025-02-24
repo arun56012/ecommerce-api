@@ -32,11 +32,12 @@ module.exports.getAllProducts = async (req, res) => {
     }
 };
 
-   
+
+
 module.exports.updateProduct = async (req, res) => {
     try {
         const { id } = req.params; // Get product ID from URL
-        const { name, quantity } = req.body; // Get updated data from request body
+        const { quantity } = req.body; // Get updated quantity from request body
 
         // Check if product exists
         const product = await Product.findById(id);
@@ -44,18 +45,42 @@ module.exports.updateProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        // Update the fields if provided
-        if (name) product.name = name;
-        if (quantity !== undefined) product.quantity = quantity;
-
-        // Save updated product
-        await product.save();
-
-        return res.status(200).json({ message: "Product updated successfully", product });
+        // Update only the quantity if provided
+        if (quantity !== undefined) {
+            product.quantity = quantity;
+            await product.save();
+            return res.status(200).json({ message: "Product quantity updated successfully", product });
+        } else {
+            return res.status(400).json({ message: "Quantity is required" });
+        }
     } catch (error) {
         return res.status(500).json({ message: "Server error", error });
     }
 };
+   
+// module.exports.updateProduct = async (req, res) => {
+//     try {
+//         const { id } = req.params; // Get product ID from URL
+//         const { name, quantity } = req.body; // Get updated data from request body
+
+//         // Check if product exists
+//         const product = await Product.findById(id);
+//         if (!product) {
+//             return res.status(404).json({ message: "Product not found" });
+//         }
+
+//         // Update the fields if provided
+//         if (name) product.name = name;
+//         if (quantity !== undefined) product.quantity = quantity;
+
+//         // Save updated product
+//         await product.save();
+
+//         return res.status(200).json({ message: "Product updated successfully", product });
+//     } catch (error) {
+//         return res.status(500).json({ message: "Server error", error });
+//     }
+// };
    
 
 module.exports.deleteProduct = async (req, res) => {
