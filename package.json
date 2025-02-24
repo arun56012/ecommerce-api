@@ -1,5 +1,5 @@
 {
-  "name": "polling_api_system",
+  "name": "e-commerce-api",
   "version": "1.0.0",
   "description": "skill Test 3 of coding ninjas using postman api's",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "Garima jain",
+  "author": "arun",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.1",

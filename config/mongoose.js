@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();  // Ensure environment variables are loaded
 
 // MongoDB Connection URI (Local or Cloud)
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/Polling_System';
+ const MONGO_URI = process.env.MONGO_URI;
 
 // Connection Options
 const connectDB = async () => {
